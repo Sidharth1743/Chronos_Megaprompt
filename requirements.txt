@@ -1,3 +1,4 @@
+PYTHON_VERSION=3.11.13
 Flask
 python-dotenv
 futurehouse-client
