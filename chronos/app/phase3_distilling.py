@@ -27,7 +27,7 @@ class Phase3Distiller:
     def __init__(
         self,
         api_key: Optional[str] = None,
-        model: str = "gemini-2.0-flash"
+        model: str = "gemini-2.0-flash-exp"
     ):
         """
         Initialize Phase 3 Distiller.

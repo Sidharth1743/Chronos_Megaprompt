@@ -18,7 +18,7 @@ class Phase1Brainstorm:
     genuine curiosity about spine health phenomena.
     """
 
-    def __init__(self, api_key: Optional[str] = None, model: str = "gemini-2.0-flash"):
+    def __init__(self, api_key: Optional[str] = None, model: str = "gemini-2.0-flash-exp"):
         """
         Initialize Phase 1 Brainstorm engine.
 

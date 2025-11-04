@@ -38,7 +38,7 @@ class Phase2ContextBuilder:
         neo4j_password: str = "0123456789",
         neo4j_database: str = "chronos",
         api_key: Optional[str] = None,
-        model: str = "gemini-2.0-flash"
+        model: str = "gemini-2.0-flash-exp"
     ):
         """Initialize Phase 2 Context Builder."""
         self.api_key = api_key or os.environ.get("GOOGLE_API_KEY")
@@ -351,7 +351,7 @@ into Node and Relationship objects."""
         return GraphElement(
             nodes=list(nodes.values()),
             relationships=relationships,
-            source=Optional['SimpleElement'] = None,
+            source=source_element
         )
 
     def extract_knowledge_graph(
