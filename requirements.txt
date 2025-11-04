@@ -1,0 +1,10 @@
+Flask
+python-dotenv
+futurehouse-client
+google-generativeai
+pillow
+PyMuPDF
+neo4j
+camel-ai
+Werkzeug
+opencv-python
