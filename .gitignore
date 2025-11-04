@@ -1,0 +1,208 @@
+# CHRONOS Project - Git Ignore File
+
+# ============================================
+# Environment & Secrets
+# ============================================
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+credentials.json
+
+# ============================================
+# Python
+# ============================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ============================================
+# IDEs & Editors
+# ============================================
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+results/
+
+# ============================================
+# Operating System Files
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ============================================
+# CHRONOS Specific
+# ============================================
+# Uploaded files
+uploads/*
+!uploads/.gitkeep
+
+# Generated results
+results/*
+!results/.gitkeep
+chronos_results/phase1/
+chronos_results/phase2/
+chronos_results/phase3/
+chronos_results/phase4/
+chronos_results/futurehouse/
+# Temporary images
+temp_images/
+*.jpg
+*.jpeg
+*.png
+*.tiff
+!template/*.html
+
+# OCR output
+out.txt
+extracted_text.txt
+
+# Neo4j data (if local)
+neo4j_data/
+
+# Old test files
+chronos_questions/
+test_output/
+
+# ============================================
+# Document Files (user uploads)
+# ============================================
+*.pdf
+!docs/*.pdf
+
+# ============================================
+# Logs
+# ============================================
+*.log
+logs/
+*.out
+
+# ============================================
+# Database
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================================
+# Temporary Files
+# ============================================
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# ============================================
+# Flask
+# ============================================
+instance/
+.webassets-cache
+
+# ============================================
+# Node (if using any frontend tools)
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ============================================
+# Documentation builds
+# ============================================
+docs/_build/
+site/
+
+# ============================================
+# Keep directory structure
+# ============================================
+# These files ensure empty directories are tracked
+!.gitkeep

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⏳ CHRONOS - Historical Medical Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
+            color: #1a1a1a;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 24px;
+            color: white;
+        }
+
+        .page-header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            border: 2px dashed #cbd5e1;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 40px;
+        }
+
+        .upload-section:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: translateY(-2px);
+        }
+
+        .upload-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .upload-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .upload-subtitle {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #4b5563;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .progress-status {
+            font-size: 14px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .progress-bar-container {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+            width: 0%;
+        }
+
+        .progress-phase {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 24px;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .result-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .result-meta {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+
+        .status-badge {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Document Info */
+        .doc-info {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f3f0ff 100%);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .doc-info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .doc-label {
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .doc-value {
+            color: #1f2937;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        /* Hypotheses Section */
+        .hypotheses-section {
+            margin-top: 32px;
+        }
+
+        .section-header {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #1f2937;
+        }
+
+        .hypothesis-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-left: 5px solid #667eea;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .hypothesis-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .hypothesis-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .hypothesis-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .priority-score {
+            background: white;
+            border: 2px solid #10b981;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .score-high {
+            color: #10b981;
+            border-color: #10b981;
+            background: #d1fae5;
+        }
+
+        .score-medium {
+            color: #f59e0b;
+            border-color: #f59e0b;
+            background: #fef3c7;
+        }
+
+        .score-low {
+            color: #ef4444;
+            border-color: #ef4444;
+            background: #fee2e2;
+        }
+
+        .hypothesis-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 14px;
+        }
+
+        .hypothesis-content {
+            font-size: 15px;
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .hypothesis-section {
+            background: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .hypothesis-section-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hypothesis-section-content {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .hypothesis-meta {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .meta-badge {
+            background: #f3f4f6;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .meta-badge.innovation-high {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .meta-badge.innovation-moderate {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        /* Hidden input */
+        #fileInput {
+            display: none;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">⏳ CHRONOS</div>
+            <div style="font-size: 14px; color: #6b7280;">Historical Medical Document Analysis</div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>⏳ CHRONOS Pipeline</h1>
+            <p>Extract testable hypotheses from historical medical literature using AI-powered 4-phase methodology</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Upload Section -->
+        <div class="upload-section" id="uploadSection" onclick="document.getElementById('fileInput').click()">
+            <div class="upload-icon">📄</div>
+            <div class="upload-title">Upload Medical Document</div>
+            <div class="upload-subtitle">
+                Drag & drop or click to browse<br>
+                <span style="font-size: 14px; color: #9ca3af;">PDF, PNG, JPG, JPEG, TIFF • Max 50MB • OCR Supported</span>
+            </div>
+            <button class="btn btn-primary">Choose File</button>
+        </div>
+
+        <input type="file" id="fileInput" accept=".pdf,.png,.jpg,.jpeg,.tiff" onchange="handleFileSelect(event)">
+
+        <!-- Progress Section -->
+        <div class="progress-section" id="progressSection">
+            <div class="progress-header">
+                <div class="progress-title">Processing Document...</div>
+                <div class="progress-status" id="progressStatus">Starting...</div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-phase" id="progressPhase">Initializing pipeline...</div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <div class="result-card">
+                <div class="result-header">
+                    <div>
+                        <h2 class="result-title" id="resultTitle">Analysis Complete</h2>
+                        <div class="result-meta" id="resultMeta">Processed on <span id="resultDate"></span></div>
+                    </div>
+                    <span class="status-badge">✓ Complete</span>
+                </div>
+
+                <div class="doc-info">
+                    <div class="doc-info-item">
+                        <span class="doc-label">Filename</span>
+                        <span class="doc-value" id="docFilename">-</span>
+                    </div>
+                    <div class="doc-info-item">
+                        <span class="doc-label">Neo4j Database</span>
+                        <span class="doc-value" id="docDatabase">-</span>
+                    </div>
+                    <div class="doc-info-item">
+                        <span class="doc-label">Hypotheses Generated</span>
+                        <span class="doc-value" id="docHypotheses">-</span>
+                    </div>
+                    <div class="doc-info-item">
+                        <span class="doc-label">Processing Time</span>
+                        <span class="doc-value" id="docTime">-</span>
+                    </div>
+                </div>
+
+                <div class="hypotheses-section">
+                    <h3 class="section-header">🔬 Generated Research Hypotheses</h3>
+                    <div id="hypothesesContainer"></div>
+                </div>
+
+                <div style="padding: 20px; background: #f0f4ff; border-radius: 12px; margin-top: 32px;">
+                    <div style="font-size: 14px; color: #4b5563; line-height: 1.6;">
+                        <strong style="color: #667eea;">⚙️ CHRONOS Methodology:</strong> This analysis employed a 4-phase approach:
+                        <strong>Phase 1</strong> - Self-critical brainstorming from historical text,
+                        <strong>Phase 2</strong> - Building HeritageNet & SpineNet knowledge graphs,
+                        <strong>Phase 3</strong> - Generating alternatives through 3 analytical lenses,
+                        <strong>Phase 4</strong> - Formulating H-format testable hypotheses with ranking by Innovation × Testability × Impact.
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 32px;">
+                <button class="btn btn-primary" onclick="location.reload()">📄 Analyze Another Document</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let processingInterval;
+        let startTime;
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Hide upload section, show progress
+            document.getElementById('uploadSection').style.display = 'none';
+            document.getElementById('progressSection').style.display = 'block';
+            document.getElementById('resultsSection').style.display = 'none';
+
+            startTime = Date.now();
+
+            // Upload file
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Start polling for status
+                    pollStatus(data.unique_id);
+                } else {
+                    showError(data.error || 'Upload failed');
+                }
+            })
+            .catch(error => {
+                showError('Upload failed: ' + error.message);
+            });
+        }
+
+        function pollStatus(uniqueId) {
+            processingInterval = setInterval(() => {
+                fetch(`/status/${uniqueId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        updateProgress(data);
+
+                        if (data.status === 'complete') {
+                            clearInterval(processingInterval);
+                            displayResults(data);
+                        } else if (data.status === 'error') {
+                            clearInterval(processingInterval);
+                            showError(data.error);
+                        }
+                    })
+                    .catch(error => {
+                        clearInterval(processingInterval);
+                        showError('Status check failed: ' + error.message);
+                    });
+            }, 2000);
+        }
+
+        function updateProgress(data) {
+            const phaseNames = {
+                'ocr': 'Extracting text with OCR...',
+                'phase1': 'Phase 1: Self-Critical Brainstorming...',
+                'phase2': 'Phase 2: Building Knowledge Graphs (HeritageNet + SpineNet)...',
+                'phase3': 'Phase 3: Distilling Through 3 Lenses...',
+                'phase4': 'Phase 4: Formulating Testable Hypotheses...',
+                'complete': 'Analysis Complete!'
+            };
+
+            document.getElementById('progressBar').style.width = data.progress + '%';
+            document.getElementById('progressStatus').textContent = data.progress + '%';
+            document.getElementById('progressPhase').textContent = phaseNames[data.phase] || 'Processing...';
+        }
+
+        function displayResults(data) {
+            const elapsedTime = Math.round((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsedTime / 60);
+            const seconds = elapsedTime % 60;
+
+            console.log('[DEBUG] Displaying results:', data);
+            console.log('[DEBUG] Hypotheses count:', data.hypotheses_count);
+            console.log('[DEBUG] Hypotheses data:', data.hypotheses);
+
+            // Hide progress, show results
+            document.getElementById('progressSection').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
+
+            // Update document info
+            document.getElementById('resultTitle').textContent = data.filename;
+            document.getElementById('resultDate').textContent = data.timestamp;
+            document.getElementById('docFilename').textContent = data.filename;
+            document.getElementById('docDatabase').textContent = data.database;
+            document.getElementById('docHypotheses').textContent = data.hypotheses_count;
+            document.getElementById('docTime').textContent = `${minutes}m ${seconds}s`;
+
+            // Display hypotheses
+            const container = document.getElementById('hypothesesContainer');
+            container.innerHTML = '';
+
+            if (!data.hypotheses || data.hypotheses.length === 0) {
+                container.innerHTML = '<div class="error-message">No hypotheses were extracted. Check server logs for parsing errors.</div>';
+                console.error('[ERROR] No hypotheses in data!');
+                return;
+            }
+
+            data.hypotheses.forEach((h, index) => {
+                console.log(`[DEBUG] Rendering hypothesis ${index + 1}:`, h);
+
+                const scoreClass = h.testability >= 8 ? 'score-high' : (h.testability >= 6 ? 'score-medium' : 'score-low');
+                const innovClass = h.innovation === 'High' ? 'innovation-high' : 'innovation-moderate';
+
+                const card = document.createElement('div');
+                card.className = 'hypothesis-card';
+                card.innerHTML = `
+                    <div class="hypothesis-header">
+                        <div class="hypothesis-number">${h.h_number}</div>
+                        <div class="priority-score ${scoreClass}">Testability: ${h.testability}/10</div>
+                    </div>
+                    <h4 class="hypothesis-title">${h.title}</h4>
+
+                    ${h.claim ? `
+                    <div class="hypothesis-section">
+                        <div class="hypothesis-section-title">💡 Claim Statement</div>
+                        <div class="hypothesis-section-content">${h.claim}</div>
+                    </div>` : ''}
+
+                    ${h.historical_source ? `
+                    <div class="hypothesis-section">
+                        <div class="hypothesis-section-title">📜 Historical Source</div>
+                        <div class="hypothesis-section-content">${h.historical_source}</div>
+                    </div>` : ''}
+
+                    ${h.modern_relevance ? `
+                    <div class="hypothesis-section">
+                        <div class="hypothesis-section-title">🔬 Modern Relevance</div>
+                        <div class="hypothesis-section-content">${h.modern_relevance}</div>
+                    </div>` : ''}
+
+                    ${h.variables ? `
+                    <div class="hypothesis-section">
+                        <div class="hypothesis-section-title">📊 Variables</div>
+                        <div class="hypothesis-section-content" style="white-space: pre-line;">${h.variables}</div>
+                    </div>` : ''}
+
+                    ${h.mechanism ? `
+                    <div class="hypothesis-section">
+                        <div class="hypothesis-section-title">⚙️ Proposed Mechanism</div>
+                        <div class="hypothesis-section-content">${h.mechanism}</div>
+                    </div>` : ''}
+
+                    <div class="hypothesis-meta">
+                        <div class="meta-badge ${innovClass}">Innovation: ${h.innovation}</div>
+                        <div class="meta-badge">Testability: ${h.testability}/10</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            console.log('[DEBUG] Finished rendering all hypotheses');
+        }
+
+        function showError(message) {
+            document.getElementById('uploadSection').style.display = 'block';
+            document.getElementById('progressSection').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'none';
+
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `<strong>Error:</strong> ${message}`;
+
+            const container = document.querySelector('.container');
+            container.insertBefore(errorDiv, container.firstChild);
+
+            setTimeout(() => errorDiv.remove(), 5000);
+        }
+    </script>
+</body>
+</html>

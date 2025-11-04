@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronos - Spinal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
+            color: #1a1a1a;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .back-link {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 40px 24px;
+            color: white;
+        }
+        
+        .page-header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .page-title-section h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+        
+        .page-title-section p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-white {
+            background: white;
+            color: #00b4d8;
+        }
+        
+        .btn-white:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1600px;
+            margin: 24px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 24px;
+        }
+        
+        /* Upload Section */
+        .upload-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e5e7eb;
+            position: sticky;
+            top: 88px;
+            height: fit-content;
+        }
+        
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 20px;
+        }
+        
+        .upload-area:hover {
+            border-color: #00b4d8;
+            background: #f0f9ff;
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .upload-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+        
+        .upload-subtitle {
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        .or-divider {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 14px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .or-divider::before,
+        .or-divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #e5e7eb;
+        }
+        
+        .or-divider::before {
+            left: 0;
+        }
+        
+        .or-divider::after {
+            right: 0;
+        }
+        
+        .url-input {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .url-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .url-input button {
+            background: #00b4d8;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .recent-analyses {
+            border-top: 1px solid #f3f4f6;
+            padding-top: 20px;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+        
+        .recent-item {
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .recent-item:hover {
+            background: #f0f9ff;
+        }
+        
+        .recent-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+        
+        .recent-date {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        
+        /* Analysis Results */
+        .results-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .result-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 20px;
+        }
+        
+        .result-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+        
+        .result-meta {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+        
+        .status-badge {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .processing-badge {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        /* Document Info */
+        .doc-info {
+            background: #f0f9ff;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .doc-info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .doc-label {
+            color: #6b7280;
+        }
+        
+        .doc-value {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        
+        /* Hypotheses */
+        .hypotheses-section {
+            margin-top: 24px;
+        }
+        
+        .hypothesis-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-left: 4px solid #00b4d8;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .hypothesis-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+        
+        .hypothesis-number {
+            background: #00b4d8;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .priority-score {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .score-high {
+            color: #10b981;
+            border-color: #10b981;
+            background: #d1fae5;
+        }
+        
+        .score-medium {
+            color: #f59e0b;
+            border-color: #f59e0b;
+            background: #fef3c7;
+        }
+        
+        .hypothesis-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+        
+        .hypothesis-content {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .hypothesis-section {
+            margin-bottom: 12px;
+        }
+        
+        .hypothesis-section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+        
+        .hypothesis-actions {
+            display: flex;
+            gap: 8px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .action-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .action-primary {
+            background: #00b4d8;
+            color: white;
+        }
+        
+        .action-secondary {
+            background: #f3f4f6;
+            color: #4b5563;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-1px);
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+        
+        .empty-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+        
+        .empty-text {
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">🔬 Spinal</div>
+            <a href="#" class="back-link">← Back to Literature Hub</a>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title-section">
+                <h1>⏳ Chronos</h1>
+                <p>Historical analysis engine - Extract hypotheses from medical literature</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-white">📊 My Analyses</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Left Sidebar - Upload -->
+        <aside class="upload-section">
+            <div class="upload-area">
+                <div class="upload-icon">📄</div>
+                <div class="upload-title">Upload PDF</div>
+                <div class="upload-subtitle">
+                    Drag & drop or click to browse<br>
+                    <span style="font-size: 12px; color: #9ca3af;">Max 50MB • Supports OCR</span>
+                </div>
+            </div>
+            
+            <div class="or-divider">OR</div>
+            
+            <div class="url-input">
+                <input type="text" placeholder="Paste PubMed URL or DOI">
+                <button>→</button>
+            </div>
+
+            <div class="recent-analyses">
+                <h4 class="section-title">Recent Analyses</h4>
+                <div class="recent-item">
+                    <div class="recent-title">Ollivier's Treatise on Spinal Diseases</div>
+                    <div class="recent-date">2 days ago • 6 hypotheses</div>
+                </div>
+                <div class="recent-item">
+                    <div class="recent-title">Thai Traditional Medicine Compendium</div>
+                    <div class="recent-date">5 days ago • 5 hypotheses</div>
+                </div>
+                <div class="recent-item">
+                    <div class="recent-title">Ancient Greek Spinal Treatments</div>
+                    <div class="recent-date">1 week ago • 4 hypotheses</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Results Area -->
+        <main class="results-section">
+            <!-- Analysis Result Card -->
+            <div class="result-card">
+                <div class="result-header">
+                    <div>
+                        <h2 class="result-title">Traité des Maladies de la Moelle Épinière</h2>
+                        <div class="result-meta">Ollivier d'Angers (1824) • Analyzed 2 days ago</div>
+                    </div>
+                    <span class="status-badge">✓ Complete</span>
+                </div>
+
+                <div class="doc-info">
+                    <div class="doc-info-item">
+                        <span class="doc-label">Document Type:</span>
+                        <span class="doc-value">Historical Medical Text</span>
+                    </div>
+                    <div class="doc-info-item">
+                        <span class="doc-label">Pages Analyzed:</span>
+                        <span class="doc-value">342 pages</span>
+                    </div>
+                    <div class="doc-info-item">
+                        <span class="doc-label">OCR Applied:</span>
+                        <span class="doc-value">Yes (French → English)</span>
+                    </div>
+                    <div class="doc-info-item">
+                        <span class="doc-label">Hypotheses Generated:</span>
+                        <span class="doc-value">6 testable hypotheses</span>
+                    </div>
+                </div>
+
+                <div class="hypotheses-section">
+                    <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">Generated Hypotheses</h3>
+
+                    <!-- Hypothesis 1 -->
+                    <div class="hypothesis-card">
+                        <div class="hypothesis-header">
+                            <div class="hypothesis-number">H1</div>
+                            <div class="priority-score score-high">Priority: 8/10</div>
+                        </div>
+                        <h4 class="hypothesis-title">Reversible Spinal Venous Congestion Syndrome</h4>
+                        <p class="hypothesis-content">
+                            Ollivier's observations of transient paralysis following spinal "congestion" may represent unrecognized venous plexus dysfunction. Modern imaging could validate this mechanism in cases of unexplained transient neurological deficits.
+                        </p>
+                        
+                        <div class="hypothesis-section">
+                            <div class="hypothesis-section-title">Proposed Mechanism:</div>
+                            <div style="font-size: 14px; color: #4b5563;">
+                                Epidural venous plexus engorgement → transient cord compression → reversible neurological symptoms
+                            </div>
+                        </div>
+
+                        <div class="hypothesis-section">
+                            <div class="hypothesis-section-title">Modern Validation Approach:</div>
+                            <div style="font-size: 14px; color: #4b5563;">
+                                Dynamic MRI with venography during symptom provocation; correlation with CSF pressure measurements
+                            </div>
+                        </div>
+
+                        <div class="hypothesis-section">
+                            <div class="hypothesis-section-title">Supporting Modern Evidence:</div>
+                            <div style="font-size: 14px; color: #4b5563;">
+                                • Recent case reports of epidural venous engorgement in neurogenic claudication<br>
+                                • Emerging research on spinal venous hemodynamics in degenerative disease
+                            </div>
+                        </div>
+
+                        <div class="hypothesis-actions">
+                            <button class="action-btn action-primary">📋 Share with Community</button>
+                            <button class="action-btn action-secondary">🔬 Design Study</button>
+                            <button class="action-btn action-secondary">💾 Save to Projects</button>
+                        </div>
+                    </div>
+
+                    <!-- Hypothesis 2 -->
+                    <div class="hypothesis-card">
+                        <div class="hypothesis-header">
+                            <div class="hypothesis-number">H6</div>
+                            <div class="priority-score score-high">Priority: 8/10</div>
+                        </div>
+                        <h4 class="hypothesis-title">Gut-Spine Axis in Neuroinflammation</h4>
+                        <p class="hypothesis-content">
+                            Ollivier's documentation of gastrointestinal symptoms preceding spinal inflammation suggests bidirectional gut-CNS communication. This aligns with emerging microbiome research and may inform treatment strategies.
+                        </p>
+                        
+                        <div class="hypothesis-section">
+                            <div class="hypothesis-section-title">Proposed Mechanism:</div>
+                            <div style="font-size: 14px; color: #4b5563;">
+                                Gut dysbiosis → systemic inflammation → blood-spinal cord barrier disruption → neuroinflammation
+                            </div>
+                        </div>
+
+                        <div class="hypothesis-section">
+                            <div class="hypothesis-section-title">Modern Validation Approach:</div>
+                            <div style="font-size: 14px; color: #4b5563;">
+                                Microbiome sequencing in spine surgery patients; correlation between gut microbial profiles and inflammatory markers/outcomes
+                            </div>
+                        </div>
+
+                        <div class="hypothesis-section">
+                            <div class="hypothesis-section-title">Supporting Modern Evidence:</div>
+                            <div style="font-size: 14px; color: #4b5563;">
+                                • Established gut-brain axis in neurological disease<br>
+                                • Emerging evidence of microbiome influence on chronic pain<br>
+                                • Inflammatory biomarkers in degenerative spine disease
+                            </div>
+                        </div>
+
+                        <div class="hypothesis-actions">
+                            <button class="action-btn action-primary">📋 Share with Community</button>
+                            <button class="action-btn action-secondary">🔬 Design Study</button>
+                            <button class="action-btn action-secondary">💾 Save to Projects</button>
+                        </div>
+                    </div>
+
+                    <!-- Hypothesis 3 -->
+                    <div class="hypothesis-card">
+                        <div class="hypothesis-header">
+                            <div class="hypothesis-number">H2</div>
+                            <div class="priority-score score-medium">Priority: 6/10</div>
+                        </div>
+                        <h4 class="hypothesis-title">Strychnine-Inspired Neuromodulation for Spasticity</h4>
+                        <p class="hypothesis-content">
+                            Historical use of low-dose strychnine for spinal disorders may inform modern neuromodulation approaches. Selective glycine receptor modulation could offer novel treatment pathways for post-surgical spasticity.
+                        </p>
+                        
+                        <div class="hypothesis-section">
+                            <div class="hypothesis-section-title">Proposed Mechanism:</div>
+                            <div style="font-size: 14px; color: #4b5563;">
+                                Targeted glycine receptor antagonism → modulation of inhibitory neurotransmission → spasticity reduction
+                            </div>
+                        </div>
+
+                        <div class="hypothesis-section">
+                            <div class="hypothesis-section-title">Clinical Feasibility:</div>
+                            <div style="font-size: 14px; color: #4b5563;">
+                                Moderate - requires development of selective compounds with improved safety profile
+                            </div>
+                        </div>
+
+                        <div class="hypothesis-actions">
+                            <button class="action-btn action-primary">📋 Share with Community</button>
+                            <button class="action-btn action-secondary">💬 Discuss Feasibility</button>
+                            <button class="action-btn action-secondary">💾 Save to Projects</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding: 16px; background: #f9fafb; border-radius: 8px; margin-top: 24px;">
+                    <div style="font-size: 13px; color: #6b7280; line-height: 1.5;">
+                        <strong>Analysis Methodology:</strong> Chronos employed semantic processing and knowledge graph integration (HeritageNet, SpineNet, HypothesisNet) to translate historical observations into structured, testable hypotheses. Each hypothesis includes explicit variables, proposed mechanisms, refutation criteria, and novelty scores.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
