@@ -351,7 +351,7 @@ into Node and Relationship objects."""
         return GraphElement(
             nodes=list(nodes.values()),
             relationships=relationships,
-            source=source_element,
+            source=Optional['SimpleElement'] = None,
         )
 
     def extract_knowledge_graph(
