@@ -12,6 +12,7 @@ from typing import Optional, Dict, Any, List
 from pathlib import Path
 from datetime import datetime
 import json
+from gemini_rate_limiter import get_rate_limiter, rate_limited_request
 from chronos_system_prompt import (
     get_chronos_system_prompt,
     get_chronos_h_format_instructions,
@@ -493,7 +494,13 @@ Generate {num_questions} research questions following the EXACT output format sp
 
         try:
             print("   🔄 Generating questions with Gemini...")
-            response = self.model.generate_content(full_prompt)
+            # Use rate-limited request instead of direct API call
+            rate_limiter = get_rate_limiter()
+            response = rate_limited_request(
+                self.model, 
+                full_prompt, 
+                delay_between_requests=15.0
+            )
 
             if not response.text:
                 raise ValueError("Empty response from Gemini model")
@@ -573,7 +580,13 @@ Provide ranking analysis and top {top_n} selections."""
 
         try:
             print("   🔄 Ranking questions with Gemini...")
-            response = self.model.generate_content(ranking_prompt)
+            # Use rate-limited request instead of direct API call
+            rate_limiter = get_rate_limiter()
+            response = rate_limited_request(
+                self.model, 
+                ranking_prompt, 
+                delay_between_requests=15.0
+            )
 
             if not response.text:
                 raise ValueError("Empty response from Gemini model")
@@ -665,7 +678,13 @@ Generate the executive summary."""
 
         try:
             print("   🔄 Generating summary with Gemini...")
-            response = self.model.generate_content(summary_prompt)
+            # Use rate-limited request instead of direct API call
+            rate_limiter = get_rate_limiter()
+            response = rate_limited_request(
+                self.model, 
+                summary_prompt, 
+                delay_between_requests=15.0
+            )
 
             if not response.text:
                 raise ValueError("Empty response from Gemini model")

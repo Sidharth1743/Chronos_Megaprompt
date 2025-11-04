@@ -14,6 +14,7 @@ import google.generativeai as genai
 from typing import Optional, Dict, Any, List
 from pathlib import Path
 from datetime import datetime
+from gemini_rate_limiter import get_rate_limiter, rate_limited_request
 
 
 class Phase3Distiller:
@@ -171,7 +172,13 @@ Generate at least 10 alternative sets for LENS A."""
 
         try:
             print("   🔄 Generating alternatives with Gemini...")
-            response = self.model.generate_content(full_prompt)
+            # Use rate-limited request instead of direct API call
+            rate_limiter = get_rate_limiter()
+            response = rate_limited_request(
+                self.model, 
+                full_prompt, 
+                delay_between_requests=15.0
+            )
 
             if not response.text:
                 raise ValueError("Empty response from Gemini model")
@@ -250,7 +257,13 @@ Generate at least 10 alternative sets for LENS B."""
 
         try:
             print("   🔄 Generating alternatives with Gemini...")
-            response = self.model.generate_content(full_prompt)
+            # Use rate-limited request instead of direct API call
+            rate_limiter = get_rate_limiter()
+            response = rate_limited_request(
+                self.model, 
+                full_prompt, 
+                delay_between_requests=15.0
+            )
 
             if not response.text:
                 raise ValueError("Empty response from Gemini model")
@@ -330,7 +343,13 @@ Generate at least 10 bridge question sets for LENS C."""
 
         try:
             print("   🔄 Generating bridge questions with Gemini...")
-            response = self.model.generate_content(full_prompt)
+            # Use rate-limited request instead of direct API call
+            rate_limiter = get_rate_limiter()
+            response = rate_limited_request(
+                self.model, 
+                full_prompt, 
+                delay_between_requests=15.0
+            )
 
             if not response.text:
                 raise ValueError("Empty response from Gemini model")
@@ -428,7 +447,13 @@ Provide the synthesis above."""
 
         try:
             print("   🔄 Generating synthesis with Gemini...")
-            response = self.model.generate_content(full_prompt)
+            # Use rate-limited request instead of direct API call
+            rate_limiter = get_rate_limiter()
+            response = rate_limited_request(
+                self.model, 
+                full_prompt, 
+                delay_between_requests=15.0
+            )
 
             if not response.text:
                 raise ValueError("Empty response from Gemini model")

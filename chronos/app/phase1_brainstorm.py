@@ -8,6 +8,7 @@ import google.generativeai as genai
 from typing import Optional, Dict, Any
 from pathlib import Path
 from datetime import datetime
+from gemini_rate_limiter import get_rate_limiter, rate_limited_request
 
 
 class Phase1Brainstorm:
@@ -146,7 +147,13 @@ Now, conduct a self-critical brainstorm following the Phase 1 instructions above
 
         try:
             print("  🔄 Generating brainstorm with Gemini...")
-            response = self.model.generate_content(full_prompt)
+            # Use rate-limited request instead of direct API call
+            rate_limiter = get_rate_limiter()
+            response = rate_limited_request(
+                self.model, 
+                full_prompt, 
+                delay_between_requests=15.0
+            )
 
             if not response.text:
                 raise ValueError("Empty response from Gemini model")
