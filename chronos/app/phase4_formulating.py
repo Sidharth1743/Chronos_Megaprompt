@@ -723,12 +723,12 @@ Generate the executive summary."""
         use_h_format: bool = True
     ) -> Dict[str, Any]:
         """
-        Run complete Phase 4: Generate questions, rank, and create summary.
+        Run complete Phase 4: Generate questions (ranking removed).
 
         Args:
             phase3_synthesis: Phase 3 synthesis output
             num_questions: Number of questions to generate
-            top_n: Number of top questions to select
+            top_n: Number of top questions to select (kept for backward compatibility but not used)
             output_dir: Directory to save results
             use_h_format: If True, use H-format (concise). If False, use 13-field format (detailed)
 
@@ -741,7 +741,6 @@ Generate the executive summary."""
         print(f"   Input: Phase 3 synthesis ({len(phase3_synthesis):,} chars)")
         print(f"   Generating {num_questions} detailed research questions")
         print(f"   Format: {'H-format (concise)' if use_h_format else '13-field format (detailed)'}")
-        print(f"   Will rank and select top {top_n}")
         print()
 
         results = {
@@ -764,26 +763,11 @@ Generate the executive summary."""
             print(f"   ⚠️  Question generation failed: {e}")
             return results
 
-        # Step 2: Rank and select top questions
-        try:
-            results["ranking"] = self.rank_and_select_questions(
-                questions_output=results["questions"]["questions_output"],
-                top_n=top_n,
-                output_dir=output_dir
-            )
-        except Exception as e:
-            print(f"   ⚠️  Ranking failed: {e}")
+        # Step 2: Ranking removed as per user request
+        print("   ℹ️  Ranking step skipped (disabled)")
 
-        # Step 3: Generate executive summary
-        if results["questions"] and results["ranking"]:
-            try:
-                results["summary"] = self.generate_executive_summary(
-                    questions_output=results["questions"]["questions_output"],
-                    ranking_output=results["ranking"]["ranking_output"],
-                    output_dir=output_dir
-                )
-            except Exception as e:
-                print(f"   ⚠️  Executive summary generation failed: {e}")
+        # Step 3: Executive summary removed (was dependent on ranking)
+        print("   ℹ️  Executive summary skipped (disabled)")
 
         print("\n✅ Phase 4 completed!")
         return results

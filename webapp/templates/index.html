@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⏳ CHRONOS - Historical Medical Analysis</title>
+    <title>CHRONOS - Historical Medical Analysis</title>
     <style>
         * {
             margin: 0;
@@ -67,21 +67,30 @@
 
         /* Container */
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 40px auto;
             padding: 0 24px;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 24px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
 
         /* Upload Section */
         .upload-section {
             background: white;
-            border-radius: 16px;
-            padding: 40px;
+            border-radius: 12px;
+            padding: 32px 24px;
             border: 2px dashed #cbd5e1;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            margin-bottom: 40px;
         }
 
         .upload-section:hover {
@@ -90,22 +99,202 @@
             transform: translateY(-2px);
         }
 
+        /* Recent Analyses Section */
+        .recent-analyses {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+        }
+
+        .recent-item {
+            padding: 14px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .recent-item:hover {
+            background: #f0f4ff;
+            border-color: #667eea;
+            transform: translateX(4px);
+        }
+
+        .recent-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 6px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .recent-date {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .recent-empty {
+            text-align: center;
+            padding: 32px 16px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        /* Community Members Dashboard */
+        .community-dashboard {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .dashboard-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .member-count {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .member-item {
+            padding: 14px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .member-item:hover {
+            background: #f0f4ff;
+            border-color: #667eea;
+            transform: translateX(2px);
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .member-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .member-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .member-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1f2937;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .member-institution {
+            font-size: 11px;
+            color: #6b7280;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .member-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        .member-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .member-stat-icon {
+            font-size: 12px;
+        }
+
+        .member-stat-value {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .top-contributor {
+            position: relative;
+        }
+
+        .top-contributor::before {
+            content: '👑';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            font-size: 16px;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-width: 0;
+        }
+
         .upload-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
+            font-size: 56px;
+            margin-bottom: 16px;
         }
 
         .upload-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
             color: #1f2937;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .upload-subtitle {
-            font-size: 16px;
+            font-size: 14px;
             color: #6b7280;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .btn {
@@ -422,6 +611,403 @@
             margin: 20px 0;
             border-left: 4px solid #ef4444;
         }
+
+        /* ========== COMMUNITY FEATURES ========== */
+
+        /* User Profile Dropdown */
+        .user-profile {
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            min-width: 300px;
+            z-index: 1000;
+        }
+
+        .user-dropdown.active {
+            display: block;
+        }
+
+        .user-dropdown-header {
+            padding: 20px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .user-dropdown-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .user-dropdown-email {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .user-stats {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .user-stats-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #667eea;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .user-stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 14px;
+        }
+
+        .user-stat-label {
+            color: #6b7280;
+        }
+
+        .user-stat-value {
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .user-dropdown-actions {
+            padding: 12px;
+        }
+
+        .dropdown-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #f3f4f6;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            color: #4b5563;
+        }
+
+        .dropdown-btn:hover {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-login, .btn-register {
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-login {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-login:hover, .btn-register:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 450px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #f3f4f6;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            color: #6b7280;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .form-link {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .form-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Star Rating */
+        .hypothesis-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 0;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .stars {
+            display: flex;
+            gap: 4px;
+        }
+
+        .star {
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #d1d5db;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #fbbf24;
+            transform: scale(1.1);
+        }
+
+        .rating-stats {
+            margin-left: auto;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 2px solid #f3f4f6;
+        }
+
+        .comments-header {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+        }
+
+        .comment-form {
+            margin-bottom: 20px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            min-height: 80px;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .comment-submit {
+            margin-top: 8px;
+            padding: 8px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .comment-submit:hover {
+            background: #5568d3;
+        }
+
+        .comment-item {
+            padding: 16px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .comment-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .comment-meta {
+            flex: 1;
+        }
+
+        .comment-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1f2937;
+        }
+
+        .comment-institution {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .comment-text {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .comment-date {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 8px;
+        }
     </style>
 </head>
 <body>
@@ -429,46 +1015,111 @@
     <div class="header">
         <div class="header-content">
             <div class="logo">⏳ CHRONOS</div>
-            <div style="font-size: 14px; color: #6b7280;">Historical Medical Document Analysis</div>
+
+            <!-- Authentication Area -->
+            <div id="authArea">
+                <!-- Not logged in: Show login/register buttons -->
+                <div id="authButtons" class="auth-buttons" style="display: none;">
+                    <button class="btn-login" onclick="showLogin()">Login</button>
+                    <button class="btn-register" onclick="showRegister()">Sign Up</button>
+                </div>
+
+                <!-- Logged in: Show user profile -->
+                <div id="userProfileArea" class="user-profile" style="display: none;">
+                    <div class="user-avatar" onclick="toggleUserDropdown()" id="userAvatar">U</div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="user-dropdown-header">
+                            <div class="user-dropdown-name" id="dropdownUserName">User</div>
+                            <div class="user-dropdown-email" id="dropdownUserEmail">user@example.com</div>
+                        </div>
+                        <div class="user-stats">
+                            <div class="user-stats-title">Community Engagement</div>
+                            <div class="user-stat-item">
+                                <span class="user-stat-label">Ratings Given</span>
+                                <span class="user-stat-value" id="userTotalRatings">0</span>
+                            </div>
+                            <div class="user-stat-item">
+                                <span class="user-stat-label">Comments Posted</span>
+                                <span class="user-stat-value" id="userTotalComments">0</span>
+                            </div>
+                            <div class="user-stat-item">
+                                <span class="user-stat-label">Endorsements</span>
+                                <span class="user-stat-value" id="userTotalEndorsements">0</span>
+                            </div>
+                            <div class="user-stat-item">
+                                <span class="user-stat-label">Member Since</span>
+                                <span class="user-stat-value" id="userMemberSince">-</span>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-actions">
+                            <button class="dropdown-btn" onclick="logout()">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Page Header -->
     <div class="page-header">
         <div class="page-header-content">
-            <h1>⏳ CHRONOS</h1>
-            <p>Extract testable hypotheses from historical medical literature using AI-powered 4-phase methodology</p>
+            <h1>CHRONOS</h1>
+            <p>Extract testable hypotheses from historical medical literature</p>
         </div>
     </div>
 
     <!-- Main Container -->
     <div class="container">
-        <!-- Upload Section -->
-        <div class="upload-section" id="uploadSection" onclick="document.getElementById('fileInput').click()">
-            <div class="upload-icon">📄</div>
-            <div class="upload-title">Upload Medical Document</div>
-            <div class="upload-subtitle">
-                Drag & drop or click to browse<br>
-                <span style="font-size: 14px; color: #9ca3af;">PDF, PNG, JPG, JPEG, TIFF • Max 50MB • OCR Supported</span>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Upload Section -->
+            <div class="upload-section" id="uploadSection" onclick="document.getElementById('fileInput').click()">
+                <div class="upload-icon">📄</div>
+                <div class="upload-title">Upload Document</div>
+                <div class="upload-subtitle">
+                    Click to browse<br>
+                    <span style="font-size: 12px; color: #9ca3af;">PDF, PNG, JPG, TIFF • Max 50MB</span>
+                </div>
+                <button class="btn btn-primary" style="padding: 10px 24px; font-size: 14px;">Choose File</button>
             </div>
-            <button class="btn btn-primary">Choose File</button>
-        </div>
+
+            <!-- Recent Analyses -->
+            <div class="recent-analyses">
+                <h4 class="section-title">Recent Analyses</h4>
+                <div id="recentAnalysesContainer">
+                    <div class="recent-empty">No analyses yet</div>
+                </div>
+            </div>
+
+            <!-- Community Dashboard -->
+            <div class="community-dashboard">
+                <div class="dashboard-header">
+                    <h4 class="dashboard-title">Community Members</h4>
+                    <span class="member-count" id="memberCount">0</span>
+                </div>
+                <div id="communityMembersContainer">
+                    <div class="recent-empty">Loading members...</div>
+                </div>
+            </div>
+        </aside>
 
         <input type="file" id="fileInput" accept=".pdf,.png,.jpg,.jpeg,.tiff" onchange="handleFileSelect(event)">
 
-        <!-- Progress Section -->
-        <div class="progress-section" id="progressSection">
-            <div class="progress-header">
-                <div class="progress-title">Processing Document...</div>
-                <div class="progress-status" id="progressStatus">Starting...</div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Progress Section -->
+            <div class="progress-section" id="progressSection">
+                <div class="progress-header">
+                    <div class="progress-title">Processing Document...</div>
+                    <div class="progress-status" id="progressStatus">Starting...</div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div class="progress-phase" id="progressPhase">Initializing pipeline...</div>
             </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <div class="progress-phase" id="progressPhase">Initializing pipeline...</div>
-        </div>
 
-        <!-- Results Section -->
+            <!-- Results Section -->
         <div class="results-section" id="resultsSection">
             <div class="result-card">
                 <div class="result-header">
@@ -517,12 +1168,394 @@
             <div style="text-align: center; margin-top: 32px;">
                 <button class="btn btn-primary" onclick="location.reload()">📄 Analyze Another Document</button>
             </div>
+        </main>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Login to CHRONOS</h2>
+                <button class="modal-close" onclick="closeLogin()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-input" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" name="password" required>
+                    </div>
+                    <button type="submit" class="form-submit">Login</button>
+                    <div class="form-link">
+                        Don't have an account? <a href="#" onclick="switchToRegister()">Sign up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Join CHRONOS Community</h2>
+                <button class="modal-close" onclick="closeRegister()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label class="form-label">Username *</label>
+                        <input type="text" class="form-input" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-input" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password *</label>
+                        <input type="password" class="form-input" name="password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" name="full_name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Institution</label>
+                        <input type="text" class="form-input" name="institution" placeholder="University, Hospital, Research Center">
+                    </div>
+                    <button type="submit" class="form-submit">Create Account</button>
+                    <div class="form-link">
+                        Already have an account? <a href="#" onclick="switchToLogin()">Login</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
         let processingInterval;
         let startTime;
+        let currentUser = null;
+        let authToken = null;
+        let currentAnalysisId = null;
+
+        // ============================================================================
+        // AUTHENTICATION FUNCTIONS
+        // ============================================================================
+
+        // Check if user is logged in on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadRecentAnalyses();
+            checkAuthStatus();
+            loadCommunityMembers();
+        });
+
+        function checkAuthStatus() {
+            authToken = localStorage.getItem('chronos_auth_token');
+            if (authToken) {
+                // Verify token and load user data
+                fetch('/api/auth/me', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        currentUser = data.user;
+                        updateAuthUI();
+                    } else {
+                        localStorage.removeItem('chronos_auth_token');
+                        authToken = null;
+                        updateAuthUI();
+                    }
+                })
+                .catch(error => {
+                    console.error('Auth check failed:', error);
+                    localStorage.removeItem('chronos_auth_token');
+                    authToken = null;
+                    updateAuthUI();
+                });
+            } else {
+                updateAuthUI();
+            }
+        }
+
+        function updateAuthUI() {
+            const authButtons = document.getElementById('authButtons');
+            const userProfileArea = document.getElementById('userProfileArea');
+
+            if (currentUser) {
+                // User is logged in
+                authButtons.style.display = 'none';
+                userProfileArea.style.display = 'block';
+
+                // Update avatar
+                const initials = currentUser.username.charAt(0).toUpperCase();
+                document.getElementById('userAvatar').textContent = initials;
+
+                // Update dropdown info
+                document.getElementById('dropdownUserName').textContent = currentUser.full_name || currentUser.username;
+                document.getElementById('dropdownUserEmail').textContent = currentUser.email;
+
+                // Update stats
+                if (currentUser.engagement) {
+                    document.getElementById('userTotalRatings').textContent = currentUser.engagement.total_ratings;
+                    document.getElementById('userTotalComments').textContent = currentUser.engagement.total_comments;
+                    document.getElementById('userTotalEndorsements').textContent = currentUser.engagement.total_endorsements;
+                    document.getElementById('userMemberSince').textContent = currentUser.engagement.member_since;
+                }
+            } else {
+                // User is not logged in
+                authButtons.style.display = 'flex';
+                userProfileArea.style.display = 'none';
+            }
+        }
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const userProfile = document.getElementById('userProfileArea');
+            const dropdown = document.getElementById('userDropdown');
+            if (userProfile && !userProfile.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        function showLogin() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeLogin() {
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('loginForm').reset();
+        }
+
+        function showRegister() {
+            document.getElementById('registerModal').classList.add('active');
+        }
+
+        function closeRegister() {
+            document.getElementById('registerModal').classList.remove('active');
+            document.getElementById('registerForm').reset();
+        }
+
+        function switchToRegister() {
+            closeLogin();
+            showRegister();
+        }
+
+        function switchToLogin() {
+            closeRegister();
+            showLogin();
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {
+                username: formData.get('username'),
+                password: formData.get('password')
+            };
+
+            fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    authToken = data.token;
+                    currentUser = data.user;
+                    localStorage.setItem('chronos_auth_token', authToken);
+                    updateAuthUI();
+                    closeLogin();
+                    alert('Login successful!');
+                } else {
+                    alert(data.error || 'Login failed');
+                }
+            })
+            .catch(error => {
+                alert('Login failed: ' + error.message);
+            });
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {
+                username: formData.get('username'),
+                email: formData.get('email'),
+                password: formData.get('password'),
+                full_name: formData.get('full_name') || '',
+                institution: formData.get('institution') || ''
+            };
+
+            fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    authToken = data.token;
+                    currentUser = data.user;
+                    localStorage.setItem('chronos_auth_token', authToken);
+                    updateAuthUI();
+                    closeRegister();
+                    alert('Registration successful! Welcome to CHRONOS Community!');
+                } else {
+                    alert(data.error || 'Registration failed');
+                }
+            })
+            .catch(error => {
+                alert('Registration failed: ' + error.message);
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem('chronos_auth_token');
+            authToken = null;
+            currentUser = null;
+            updateAuthUI();
+            document.getElementById('userDropdown').classList.remove('active');
+            alert('Logged out successfully');
+        }
+
+        // ============================================================================
+        // EXISTING FUNCTIONS
+        // ============================================================================
+
+        // Load recent analyses on page load
+        function loadRecentAnalyses() {
+            fetch('/recent-analyses')
+                .then(response => response.json())
+                .then(analyses => {
+                    const container = document.getElementById('recentAnalysesContainer');
+
+                    if (analyses.length === 0) {
+                        container.innerHTML = '<div class="recent-empty">No analyses yet</div>';
+                        return;
+                    }
+
+                    container.innerHTML = '';
+                    analyses.forEach(analysis => {
+                        const item = document.createElement('div');
+                        item.className = 'recent-item';
+                        item.innerHTML = `
+                            <div class="recent-title" title="${analysis.filename}">${analysis.filename}</div>
+                            <div class="recent-date">${analysis.date_readable} • ${analysis.hypotheses_count} hypotheses</div>
+                        `;
+                        item.onclick = () => loadAnalysis(analysis.unique_id);
+                        container.appendChild(item);
+                    });
+                })
+                .catch(error => {
+                    console.error('Failed to load recent analyses:', error);
+                });
+        }
+
+        function loadAnalysis(uniqueId) {
+            fetch(`/results/${uniqueId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                        return;
+                    }
+                    displayResults(data);
+                })
+                .catch(error => {
+                    alert('Failed to load analysis: ' + error.message);
+                });
+        }
+
+        // Load community members dashboard
+        function loadCommunityMembers() {
+            fetch('/api/community/members')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        console.error('Failed to load members:', data.error);
+                        return;
+                    }
+
+                    const container = document.getElementById('communityMembersContainer');
+                    const memberCountBadge = document.getElementById('memberCount');
+
+                    // Update member count badge
+                    memberCountBadge.textContent = data.total_count;
+
+                    if (data.members.length === 0) {
+                        container.innerHTML = '<div class="recent-empty">No members yet</div>';
+                        return;
+                    }
+
+                    container.innerHTML = '';
+                    data.members.forEach((member, index) => {
+                        // Calculate total engagement
+                        const totalEngagement = member.engagement.total_ratings +
+                                              member.engagement.total_comments +
+                                              member.engagement.total_endorsements;
+
+                        // Mark top contributor (first member with any engagement)
+                        const isTopContributor = index === 0 && totalEngagement > 0;
+
+                        const memberDiv = document.createElement('div');
+                        memberDiv.className = `member-item ${isTopContributor ? 'top-contributor' : ''}`;
+
+                        // Get initials from username
+                        const initials = member.username.charAt(0).toUpperCase();
+
+                        memberDiv.innerHTML = `
+                            <div class="member-header">
+                                <div class="member-avatar">${initials}</div>
+                                <div class="member-info">
+                                    <div class="member-name">${member.full_name || member.username}</div>
+                                    ${member.institution ? `<div class="member-institution">${member.institution}</div>` : ''}
+                                </div>
+                            </div>
+                            <div class="member-stats">
+                                <div class="member-stat">
+                                    <span class="member-stat-icon">⭐</span>
+                                    <span class="member-stat-value">${member.engagement.total_ratings}</span>
+                                </div>
+                                <div class="member-stat">
+                                    <span class="member-stat-icon">💬</span>
+                                    <span class="member-stat-value">${member.engagement.total_comments}</span>
+                                </div>
+                                <div class="member-stat">
+                                    <span class="member-stat-icon">✓</span>
+                                    <span class="member-stat-value">${member.engagement.total_endorsements}</span>
+                                </div>
+                            </div>
+                        `;
+
+                        container.appendChild(memberDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Failed to load community members:', error);
+                    const container = document.getElementById('communityMembersContainer');
+                    container.innerHTML = '<div class="recent-empty">Failed to load members</div>';
+                });
+        }
+
+        // Load recent analyses on page load
+        window.addEventListener('DOMContentLoaded', loadRecentAnalyses);
 
         function handleFileSelect(event) {
             const file = event.target.files[0];
@@ -580,24 +1613,37 @@
         }
 
         function updateProgress(data) {
-            const phaseNames = {
-                'ocr': 'Extracting text with OCR...',
-                'phase1': 'Phase 1: Self-Critical Brainstorming...',
-                'phase2': 'Phase 2: Building Knowledge Graphs (HeritageNet + SpineNet)...',
-                'phase3': 'Phase 3: Distilling Through 3 Lenses...',
-                'phase4': 'Phase 4: Formulating Testable Hypotheses...',
-                'complete': 'Analysis Complete!'
-            };
-
             document.getElementById('progressBar').style.width = data.progress + '%';
             document.getElementById('progressStatus').textContent = data.progress + '%';
-            document.getElementById('progressPhase').textContent = phaseNames[data.phase] || 'Processing...';
+
+            // Use phase_display from backend if available, otherwise fallback to phase names
+            if (data.phase_display) {
+                document.getElementById('progressPhase').textContent = data.phase_display;
+            } else {
+                const phaseNames = {
+                    'initializing': 'Initializing pipeline...',
+                    'ocr': 'Extracting text with OCR...',
+                    'phase1': 'Phase 1: Brainstorming...',
+                    'phase2': 'Phase 2: Context Building...',
+                    'phase3': 'Phase 3: Distilling...',
+                    'phase4': 'Phase 4: Formulating...',
+                    'complete': 'Analysis Complete!'
+                };
+                document.getElementById('progressPhase').textContent = phaseNames[data.phase] || 'Processing...';
+            }
         }
 
         function displayResults(data) {
-            const elapsedTime = Math.round((Date.now() - startTime) / 1000);
-            const minutes = Math.floor(elapsedTime / 60);
-            const seconds = elapsedTime % 60;
+            let elapsedTime = 0;
+            let minutes = 0;
+            let seconds = 0;
+
+            // Only calculate elapsed time if startTime exists (for new analyses)
+            if (startTime) {
+                elapsedTime = Math.round((Date.now() - startTime) / 1000);
+                minutes = Math.floor(elapsedTime / 60);
+                seconds = elapsedTime % 60;
+            }
 
             console.log('[DEBUG] Displaying results:', data);
             console.log('[DEBUG] Hypotheses count:', data.hypotheses_count);
@@ -607,13 +1653,22 @@
             document.getElementById('progressSection').style.display = 'none';
             document.getElementById('resultsSection').style.display = 'block';
 
+            // Reload recent analyses list
+            loadRecentAnalyses();
+
             // Update document info
             document.getElementById('resultTitle').textContent = data.filename;
             document.getElementById('resultDate').textContent = data.timestamp;
             document.getElementById('docFilename').textContent = data.filename;
             document.getElementById('docDatabase').textContent = data.database;
             document.getElementById('docHypotheses').textContent = data.hypotheses_count;
-            document.getElementById('docTime').textContent = `${minutes}m ${seconds}s`;
+
+            // Only show elapsed time for new analyses
+            if (startTime) {
+                document.getElementById('docTime').textContent = `${minutes}m ${seconds}s`;
+            } else {
+                document.getElementById('docTime').textContent = 'N/A';
+            }
 
             // Display hypotheses
             const container = document.getElementById('hypothesesContainer');
@@ -674,8 +1729,52 @@
                         <div class="meta-badge ${innovClass}">Innovation: ${h.innovation}</div>
                         <div class="meta-badge">Testability: ${h.testability}/10</div>
                     </div>
+
+                    <!-- Rating Section -->
+                    <div class="hypothesis-rating" id="rating-${h.h_number}">
+                        <div class="stars" data-hypothesis="${h.h_number}">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <div class="rating-stats" id="rating-stats-${h.h_number}">
+                            <span id="avg-rating-${h.h_number}">0.0</span> ⭐
+                            (<span id="rating-count-${h.h_number}">0</span> ratings)
+                        </div>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="comments-section">
+                        <div class="comments-header">💬 Discussion (<span id="comment-count-${h.h_number}">0</span>)</div>
+
+                        <div class="comment-form" style="display: ${currentUser ? 'block' : 'none'};">
+                            <textarea class="comment-input" id="comment-input-${h.h_number}" placeholder="Share your thoughts..."></textarea>
+                            <button class="comment-submit" onclick="submitComment('${data.unique_id}', '${h.h_number}')">Post Comment</button>
+                        </div>
+
+                        ${!currentUser ? '<div style="text-align: center; padding: 12px; color: #6b7280; font-size: 14px;"><a href="#" onclick="showLogin()" style="color: #667eea; text-decoration: none; font-weight: 600;">Login</a> to comment and rate</div>' : ''}
+
+                        <div id="comments-${h.h_number}"></div>
+                    </div>
                 `;
                 container.appendChild(card);
+
+                // Load ratings and comments for this hypothesis
+                loadHypothesisRatings(data.unique_id, h.h_number);
+                loadHypothesisComments(data.unique_id, h.h_number);
+
+                // Add click handlers for stars
+                if (currentUser) {
+                    const stars = card.querySelectorAll('.star');
+                    stars.forEach(star => {
+                        star.addEventListener('click', () => {
+                            const rating = parseInt(star.dataset.rating);
+                            rateHypothesis(data.unique_id, h.h_number, rating);
+                        });
+                    });
+                }
             });
 
             console.log('[DEBUG] Finished rendering all hypotheses');
@@ -694,6 +1793,152 @@
             container.insertBefore(errorDiv, container.firstChild);
 
             setTimeout(() => errorDiv.remove(), 5000);
+        }
+
+        // ============================================================================
+        // RATING & COMMENT FUNCTIONS
+        // ============================================================================
+
+        function rateHypothesis(uniqueId, hypothesisId, rating) {
+            if (!currentUser) {
+                showLogin();
+                return;
+            }
+
+            fetch(`/api/hypotheses/${uniqueId}/${hypothesisId}/rate`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify({ rating })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update UI
+                    document.getElementById(`avg-rating-${hypothesisId}`).textContent = data.avg_rating.toFixed(1);
+                    document.getElementById(`rating-count-${hypothesisId}`).textContent = data.rating_count;
+
+                    // Highlight user's rating
+                    const stars = document.querySelectorAll(`[data-hypothesis="${hypothesisId}"] .star`);
+                    stars.forEach((star, idx) => {
+                        if (idx < rating) {
+                            star.classList.add('active');
+                        } else {
+                            star.classList.remove('active');
+                        }
+                    });
+
+                    // Refresh user stats
+                    checkAuthStatus();
+                } else {
+                    alert(data.error || 'Rating failed');
+                }
+            })
+            .catch(error => {
+                alert('Rating failed: ' + error.message);
+            });
+        }
+
+        function loadHypothesisRatings(uniqueId, hypothesisId) {
+            fetch(`/api/hypotheses/${uniqueId}/${hypothesisId}/ratings`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById(`avg-rating-${hypothesisId}`).textContent = data.avg_rating.toFixed(1);
+                        document.getElementById(`rating-count-${hypothesisId}`).textContent = data.rating_count;
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to load ratings:', error);
+                });
+        }
+
+        function submitComment(uniqueId, hypothesisId) {
+            if (!currentUser) {
+                showLogin();
+                return;
+            }
+
+            const input = document.getElementById(`comment-input-${hypothesisId}`);
+            const commentText = input.value.trim();
+
+            if (!commentText) {
+                alert('Please enter a comment');
+                return;
+            }
+
+            fetch(`/api/hypotheses/${uniqueId}/${hypothesisId}/comments`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify({ comment_text: commentText })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    input.value = '';
+                    loadHypothesisComments(uniqueId, hypothesisId);
+
+                    // Refresh user stats
+                    checkAuthStatus();
+                } else {
+                    alert(data.error || 'Comment failed');
+                }
+            })
+            .catch(error => {
+                alert('Comment failed: ' + error.message);
+            });
+        }
+
+        function loadHypothesisComments(uniqueId, hypothesisId) {
+            fetch(`/api/hypotheses/${uniqueId}/${hypothesisId}/comments`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById(`comment-count-${hypothesisId}`).textContent = data.count;
+
+                        const commentsContainer = document.getElementById(`comments-${hypothesisId}`);
+                        commentsContainer.innerHTML = '';
+
+                        if (data.comments.length === 0) {
+                            commentsContainer.innerHTML = '<div style="text-align: center; padding: 20px; color: #9ca3af; font-size: 14px;">No comments yet. Be the first to share your thoughts!</div>';
+                            return;
+                        }
+
+                        data.comments.forEach(comment => {
+                            const commentDiv = document.createElement('div');
+                            commentDiv.className = 'comment-item';
+
+                            const initials = comment.username.charAt(0).toUpperCase();
+                            const commentDate = new Date(comment.created_at).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric'
+                            });
+
+                            commentDiv.innerHTML = `
+                                <div class="comment-author">
+                                    <div class="comment-avatar">${initials}</div>
+                                    <div class="comment-meta">
+                                        <div class="comment-name">${comment.full_name || comment.username}</div>
+                                        ${comment.institution ? `<div class="comment-institution">${comment.institution}</div>` : ''}
+                                    </div>
+                                </div>
+                                <div class="comment-text">${comment.comment_text}</div>
+                                <div class="comment-date">${commentDate}</div>
+                            `;
+
+                            commentsContainer.appendChild(commentDiv);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to load comments:', error);
+                });
         }
     </script>
 </body>
