@@ -5,6 +5,6 @@ google-generativeai
 pillow
 PyMuPDF
 neo4j
-camel-ai=0.2.75
+camel-ai==0.2.75
 Werkzeug
 opencv-python
