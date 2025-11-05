@@ -347,14 +347,21 @@ into Node and Relationship objects."""
                 relationships.append(relationship)
 
         # Create source element from the source text
-        source_element = self._create_source_element(source_text if source_text else llm_output)
-
-        return GraphElement(
-            nodes=list(nodes.values()),
-            relationships=relationships,
-            source=source_element
-        )
-
+        # Try to create source element, but handle version compatibility
+        try:
+           source_element = self._create_source_element(source_text if source_text else llm_output)
+           return GraphElement(
+                nodes=list(nodes.values()),
+               relationships=relationships,
+               source=source_element)
+        except Exception as e:
+           # Fallback: GraphElement may not accept source in some versions
+           print(f"   ⚠️  Warning: Could not create GraphElement with source ({e})")
+           print(f"   ℹ️  Creating GraphElement without source field...")
+           return GraphElement(
+               nodes=list(nodes.values()),
+               relationships=relationships
+                      )
     def extract_knowledge_graph(
         self,
         phase1_brainstorm: str,
